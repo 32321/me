@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ZLH</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <style>
+        body{
+
+            background: url("imgs/me2.jpg");
+            background-size: cover;
+        }
+        .container{
+            margin: 10px 50px;
+            background-color: antiquewhite;
+            opacity: .5;/* 透明度 0为完全透明 1为完全透明 */
+        }
+        .container > .head li{
+            width: 20%;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            float: left;
+        }
+        .content > div{
+            display: none;
+        }
+        .content .li1{
+            display: block;
+        }
+        .li1 li{
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            line-height: 150px;
+            text-align: center;
+            background-color: forestgreen;
+        }
+        .onclick{
+            color:red;
+            font-size: 30px;
+            height: 150px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="head">
+            <ul class="clearfix">
+                <li>Technical&nbsp;Person</li>
+                <li>My&nbsp;Works</li>
+                <li>My&nbsp;Hobby</li>
+                <li>My&nbsp;Blog</li>
+                <li>About&nbsp;Me</li>
+            </ul>
+        </div>
+        <div class="content">
+            <div class="li1">
+                <div class="nav">
+                    <ul>
+                        <li>Books</li>
+                        <li>HTML</li>
+                        <li>CSS</li>
+                        <li>JS</li>
+                        <li>JAVA</li>
+                        <li>PYTHON</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="li2">
+                <a href="14_立方体.html" target="_parent">3D立方体</a>
+                <!--<a href=""></a>-->
+            </div>
+            <div class="li3">CC</div>
+            <div class="li4">DD</div>
+            <div class="li5">EE</div>
+        </div>
+        <div class="footer"></div>
+    </div>
+    <script src="js/jquery-3.3.1.js"></script>
+    <script>
+        $(".head li").click(function () {
+            //这一行代码是让这一行当前元素的内容显示 兄弟元素的内容隐藏
+            $(".content > div").eq($(".head li").index($(this))).css("display","block").siblings().css("display","none");
+        });
+        $(".content li").click(function () {
+             $(this).addClass("onclick").siblings().removeClass("onclick");
+             $(this).css({"line-height":"50px","transition":"line-height 1s linear"}).siblings().css("line-height","150px");
+        });
+    </script>
+</body>
+</html>
