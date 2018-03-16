@@ -2,91 +2,217 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>ZLH</title>
-    <link rel="stylesheet" href="css/reset.css">
+    <title>Title</title>
     <style>
+        *{
+            margin: 0;
+        }
+        li{
+            list-style-type: none;
+            cursor: pointer;
+        }
         body{
-
-            background: url("imgs/me2.jpg");
+            height: 3000px;
+        }
+        .first{
+            background-image: url("imgs/h1.jpg");
+            background-repeat: no-repeat;
             background-size: cover;
+            width: 100%;
+            height: 800px;
+            overflow: hidden;
+            opacity: .8;
+            perspective: 1000px;
+            perspective-origin: left center;
         }
-        .container{
-            margin: 10px 50px;
-            background-color: antiquewhite;
-            opacity: .5;/* 透明度 0为完全透明 1为完全透明 */
-        }
-        .container > .head li{
-            width: 20%;
-            height: 50px;
-            line-height: 50px;
+        .first .icon-left{
+            width: 300px;
+            height: 70px;
+            background-color:rgba(0,0,0,.4);
             text-align: center;
-            float: left;
+            position: fixed;
+            top: 50px;
+            left: 50px;
+            border-radius: 30px;
         }
-        .content > div{
+        .first .icon-left .name{
+            float: left;
+            position: absolute;
+            left: 30px;
+            line-height: 70px;
+            font-size: 25px;
+        }
+        .first .icon-left span:last-child{
+            font-size: 30px;
+            line-height: 70px;
+            font-weight: bolder;
+            float: right;
+        }
+        .first .icon-right{
+            width: 40px;
+            height: 40px;
+            background-color: #12021e;
+            opacity: .3;
+            border-radius: 50%;
+            position: fixed;
+            right: 50px;
+            top: 50px;
+            padding:5px;
+            text-align: center;
+            z-index: 5;
+        }
+        .icon-right div{
+            width: 30px;
+            height: 3px;
+            background-color: #fcfffa;
+            margin: 7px 5px;
+        }
+        .first .nav{
+            width: 0;
+            height: 0;
+            border-left-width: 80px;
+            border-bottom-width: 400px;
+            border-color: rgba(10, 61, 25, 0.88);
+            border-style: solid;
+            border-right-width: 100px;
+            border-left-color: transparent;
+            border-top-color: transparent;
+            float: right;
+            display: none;
+            position: relative;
+        }
+        .first .nav ul{
+            position: absolute;
+            right: -80px;
+            top: 150px;
+        }
+        .first .nav li{
+            width: 80px;
+            margin: 30px 0;
+        }
+        .first .about-me{
+            width: 800px;
+            height: 150px;
+            transition: all 100ms linear;
+            opacity: .5;
+            font-size: 20px;
+            line-height: 35px;
+            margin: 250px auto;
+        }
+        .first .tip{
+            width: 40px;
+            height: 30px;
+            position: absolute;
+            top: 90px;
+            right: 60px;
+            border-radius: 40px  30px 30px 30px;
+            background-color: #b5ff1e;
+            text-align: center;
+            line-height:30px;
             display: none;
         }
-        .content .li1{
-            display: block;
-        }
-        .li1 li{
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            line-height: 150px;
-            text-align: center;
-            background-color: forestgreen;
-        }
-        .onclick{
-            color:red;
-            font-size: 30px;
-            height: 150px;
-        }
-    </style>
+        </style>
 </head>
 <body>
     <div class="container">
-        <div class="head">
-            <ul class="clearfix">
-                <li>Technical&nbsp;Person</li>
-                <li>My&nbsp;Works</li>
-                <li>My&nbsp;Hobby</li>
-                <li>My&nbsp;Blog</li>
-                <li>About&nbsp;Me</li>
-            </ul>
-        </div>
-        <div class="content">
-            <div class="li1">
-                <div class="nav">
-                    <ul>
-                        <li>Books</li>
-                        <li>HTML</li>
-                        <li>CSS</li>
-                        <li>JS</li>
-                        <li>JAVA</li>
-                        <li>PYTHON</li>
-                    </ul>
-                </div>
+        <div class="first" id="forfirst">
+            <div class="icon-left">
+                <span class="name">朱&nbsp;立&nbsp;豪</span>
+                <span >Studying...</span>
             </div>
-            <div class="li2">
-                <a href="14_立方体.html" target="_parent">3D立方体</a>
-                <!--<a href=""></a>-->
+            <div class="icon-right">
+                <div></div>
+                <div></div>
+                <div></div>
             </div>
-            <div class="li3">CC</div>
-            <div class="li4">DD</div>
-            <div class="li5">EE</div>
+            <div class="tip">导航</div>
+            <div class="nav">
+                <ul>
+                    <li>学习资源</li>
+                    <li>博客</li>
+                    <li>作品</li>
+                    <li>Me</li>
+                </ul>
+            </div>
+            <div class="about-me">
+                 &nbsp;&nbsp;&nbsp;&nbsp;我是朱立豪，就读于东北林业大学软件工程专业，爱好前端，希望从事前端相关的研发。目前正在研读高程3和看一些技术
+                博客，希望能多学习点知识。同时也在做一些小项目，也在不断的解决问题，慢慢的积累经验。
+                我认为在学习过程中敲代码和总结最重要，把握好这两方面进步是最大的。。
+            </div>
         </div>
-        <div class="footer"></div>
+        <div class="footer">
+            <div class="link">
+                <a href=""></a><a href=""></a><a href=""></a><a href=""></a>
+            </div>
+        </div>
     </div>
-    <script src="js/jquery-3.3.1.js"></script>
     <script>
-        $(".head li").click(function () {
-            //这一行代码是让这一行当前元素的内容显示 兄弟元素的内容隐藏
-            $(".content > div").eq($(".head li").index($(this))).css("display","block").siblings().css("display","none");
-        });
-        $(".content li").click(function () {
-             $(this).addClass("onclick").siblings().removeClass("onclick");
-             $(this).css({"line-height":"50px","transition":"line-height 1s linear"}).siblings().css("line-height","150px");
-        });
+        var fir=document.getElementsByClassName("first")[0];
+        var oAbout=fir.getElementsByClassName("about-me")[0];
+        var oir=fir.getElementsByClassName("icon-right")[0];
+        var aDiv=oir.getElementsByTagName("div");
+        var oNav=document.getElementsByClassName("nav")[0];
+        var oTip=document.getElementsByClassName("tip")[0];
+        //提示这是一个导航按钮
+        oir.onmouseover=function () {
+            oTip.style.display="block";
+        }
+        oir.onmouseout=function () {
+            oTip.style.display="none";
+        }
+        //让本网站的导航显示
+        function oir_cli () {
+            aDiv[1].style.transform="rotate(45deg)";
+            aDiv[0].style.display="none";
+            aDiv[2].style.transform="rotate(-45deg)";
+            oNav.style.display="block";
+            var lis=oNav.getElementsByTagName("li");
+            oTip.style.display="none";
+            for(var i=0;i<lis.length;i++){
+                lis[i].onmouseover=function () {
+                    this.style.fontStyle="italic";
+                    this.style.fontWeight="bolder";
+                    this.style.fontSize="20px";
+                }
+                lis[i].onmouseout=function () {
+                    this.style.fontStyle="normal";
+                    this.style.fontWeight="normal";
+                    this.style.fontSize="16px";
+                }
+            }
+            //再次点击导航按钮导航栏就会消失
+            oir.onclick=function () {
+                oNav.style.display="none";
+                oir.onclick=oir_cli;
+                aDiv[1].style.transform="rotate(0)";
+                aDiv[0].style.display="block";
+                aDiv[2].style.transform="rotate(0)";
+            }
+        }
+        oir.onclick=oir_cli;
+        //当鼠标放在自我介绍上时的响应
+        oAbout.onmouseover=function () {
+            oAbout.style.backgroundColor="#E8E8E8";
+            oAbout.style.boxShadow="5px 5px 2px rgba(0,0,0,.5)";
+            oAbout.onmousemove=function (e) {
+                var x=e.clientX;
+                if(x<fir.offsetWidth/2){
+                    oAbout.style.transform="rotateY("+(fir.offsetWidth/2-x)/50+"deg)";
+                }
+                if(x>oir.offsetWidth/2){
+                    oAbout.style.transform="rotateY("+(fir.offsetWidth/2-x)/50+"deg)";
+                    fir.style.perspectiveOrigin="right center";
+                }
+            }
+        }
+        //当鼠标离开自我介绍上时的响应
+        oAbout.onmouseout=function () {
+            oAbout.style.backgroundColor="";
+            oAbout.style.boxShadow="";
+            oAbout.style.transform="rotateY(0deg)";
+            fir.style.perspectiveOrigin="left center";
+        }
+
     </script>
 </body>
 </html>
