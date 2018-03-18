@@ -8,21 +8,27 @@ var oir=fir.getElementsByClassName("icon-right")[0];
 var aDiv=oir.getElementsByTagName("div");
 var oNav=document.getElementsByClassName("nav")[0];
 var oTip=document.getElementsByClassName("tip")[0];
+var oVer=document.getElementsByClassName("ver")[0];
+var oSp=oir.getElementsByTagName("span")[0];
+
 //提示这是一个导航按钮
 oir.onmouseover=function () {
     oTip.style.display="block";
+    oVer.style.display="block";
 }
 oir.onmouseout=function () {
     oTip.style.display="none";
+    oVer.style.display="none";
 }
 //让本网站的导航显示
 function oir_cli () {
-    aDiv[1].style.transform="rotate(45deg)";
     aDiv[0].style.display="none";
-    aDiv[2].style.transform="rotate(-45deg)";
+    aDiv[1].style.display="none";
+    aDiv[2].style.display="none";
+    oSp.style.display="inline-block";
     oNav.style.display="block";
+    oir.onmouseover=null;
     var lis=oNav.getElementsByTagName("li");
-    oTip.style.display="none";
     for(var i=0;i<lis.length;i++){
         lis[i].onmouseover=function () {
             this.style.fontStyle="italic";
@@ -33,15 +39,20 @@ function oir_cli () {
             this.style.fontStyle="normal";
             this.style.fontWeight="normal";
             this.style.fontSize="16px";
+            oir.onmouseover=function () {
+                oVer.style.display="block";
+                oTip.style.display="block";
+            };
         }
     }
     //再次点击导航按钮导航栏就会消失
     oir.onclick=function () {
         oNav.style.display="none";
         oir.onclick=oir_cli;
-        aDiv[1].style.transform="rotate(0)";
+        oSp.style.display="none";
         aDiv[0].style.display="block";
-        aDiv[2].style.transform="rotate(0)";
+        aDiv[1].style.display="block";
+        aDiv[2].style.display="block";
     }
 }
 oir.onclick=oir_cli;

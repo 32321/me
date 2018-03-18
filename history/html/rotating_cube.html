@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>旋转的立方体</title>
     <style>
         *{
             margin: 0;
@@ -13,10 +13,9 @@
             perspective:1000px;
         }
         .box{
-            width: 200px;
-            height: 200px;
-            border:20px dashed #b5ff1e;
-            margin: 100px auto;
+            width: 100px;
+            height: 100px;
+            margin: 50px auto;
             position: relative;
             transform-style: preserve-3d;
             animation:run 2s linear infinite;
@@ -30,10 +29,10 @@
             }
         }
         .box div{
-            width: 200px;
-            height: 200px;
+            width: 100px;
+            height: 100px;
             background-color: rgba(255,255,255,0.5);
-            line-height: 200px;
+            line-height: 100px;
             font-size: 30px;
             text-align: center;
             color: #c8fffa;
@@ -42,22 +41,22 @@
             top:0;
         }
         .div1{
-            transform: rotateY(-90deg) translateZ(100px);
+            transform: rotateY(-90deg) translateZ(50px);
         }
         .div2{
-            transform: rotateY(90deg) translateZ(100px);
+            transform: rotateY(90deg) translateZ(50px);
         }
         .div3{
-            transform: rotateX(90deg) translateZ(100px);
+            transform: rotateX(90deg) translateZ(50px);
         }
         .div4{
-            transform: rotateX(-90deg) translateY(100px);
+            transform: rotateX(-90deg) translateZ(50px);
         }
         .div5{
-            transform:translateZ(-100px);
+            transform:translateZ(-50px);
         }
         .div6{
-            transform:translateZ(100px);
+            transform:translateZ(50px);
         }
     </style>
 </head>
