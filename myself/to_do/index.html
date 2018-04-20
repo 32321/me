@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My To Do</title>
+    <link rel="stylesheet" href="node_modules/normalize.css/normalize.css">
+    <link rel="stylesheet" href="css/base.css">
+</head>
+<body>
+    <div class="container">  <!-- 总容器开始 -->
+        <h1>我的ToDo</h1>
+        <div class="add-task"> <!-- 添加任务开始 -->
+            <input type="text" placeholder="e.g.今天晚上记得买菜果">
+            <button>submit</button>
+        </div>  <!-- 添加任务结束 -->
+        <div class="task-list">   <!-- 任务列表开始 -->
+
+        </div>   <!-- 任务列表结束 -->
+        <div class="delete-trfa"></div>     <!-- 遮挡层 -->
+        <div class="task-delete">  <!-- 询问是否删除开始 -->
+            <p></p>
+            <div class="sel">
+                <button>确定</button> <button>取消</button>
+            </div>
+        </div>   <!-- 询问是否删除结束 -->
+        <div class="task-detail-mask"></div>
+        <div class="task-detail">   <!-- 任务描述开始 -->
+            <div class="content">
+
+            </div>
+            <div>
+                <div class="desc">
+                    <textarea></textarea>
+                </div>
+            </div>
+            <div class="remind">
+                <input type="date">
+                <button class="submit">更新</button>
+                <button class="cancle">取消</button>
+            </div>
+        </div>   <!-- 任务描述结束 -->
+    </div><!-- 总容器结束 -->
+    <script src="node_modules/jquery/dist/jquery.js"></script>
+    <script src="js/base.js"></script>
+</body>
+</html>
