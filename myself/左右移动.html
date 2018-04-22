@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <style>
+        div{
+            width: 200px;
+            height: 550px;
+            float: left;
+        }
+        div:first-child{
+            margin-right: 30px;
+        }
+        p{
+            background-color: #666666;
+            cursor: pointer;
+        }
+        select{
+            width: 200px;
+            height: 400px;
+        }
+    </style>
+</head>
+<body>
+<div>
+<select multiple="multiple" name="" id="left">
+    <option value="">HFGEUFGUIWUUS</option>
+    <option value="">FEWFIHWUFYUWY</option>
+    <option value="">HEFYUUWIEFKHD</option>
+    <option value="">JIJOPFIUE8;DG</option>
+    <option value="">RERWUDHUDDDWW</option>
+    <option value="">EWUI IDUUCIFI</option>
+    <option value="">WFWEFWEOFYWFY</option>
+    <option value="">FWFDPIWUDJBCF</option>
+</select>
+    <p id="move1">将选定内容移动到右边</p>
+    <p id="move2">将全部内容移动到右边</p>
+</div>
+<div>
+    <select multiple="multiple" name="" id="right">
+        <option value="">DHWUDWUUWUDUD</option>
+        <option value="">BCCHIRPOQWEPO</option>
+        <option value="">CDFCHEUUIWHGD</option>
+    </select>
+    <p id="move3">将选定内容移动到左边</p>
+    <p id="move4">将全部内容移动到左边</p>
+</div>
+<script>
+    $("#move2").click(function () {
+         $("#left option").appendTo("#right");
+    });
+    $("#move4").click(function () {
+        $("#right option").appendTo("#left");
+    });
+//    $("#left option").dblclick(function () {
+//        $(this).appendTo('#right');
+//    })
+//    $("#right option").dblclick(function () {
+//        $(this).appendTo('#left');
+//    })
+    $("#left").on("dblclick",function () {    //需要使用事件委托
+        $("#left option:selected").appendTo('#right');
+    })
+    $("#right").on("dblclick",function () {
+        $("#right option:selected").appendTo('#left');
+    })
+    $("#move1").click(function () {
+        $("#left option:selected").appendTo('#right');
+    })
+    $("#move3").click(function () {
+        $("#right option:selected").appendTo('#left');
+    })
+</script>
+</body>
+</html>

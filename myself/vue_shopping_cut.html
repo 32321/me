@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .list-location {
+            margin: 200px 100px;
+            text-align: center;
+        }
+
+        div table .reds {
+            background-color: red;
+        }
+
+        .btn-red {
+            font-size: 20px;
+            color: rebeccapurple;
+        }
+
+        div table .sel-sum {
+            display: inline-block;
+            width: 150px;
+            height: 35px;
+            line-height: 35px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div class="container list-location">
+            <h2 class="text-center">我的购物车</h2>
+            <br/>
+            <div class="col-lg-4 col-lg-offset-4">
+                <div class="input-group">
+                    <input type="text" class="form-control" v-model="keywords" placeholder="Search for...">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" @click="search" type="button">Go!</button>
+                    </span>
+                </div>
+                <!-- /input-group -->
+            </div>
+            <br/>
+            <br/>
+            <br/>
+            <!-- /.col-lg-6 -->
+            <form class="form-inline">
+                <div class="form-group">
+                    <label for="exampleInputName2">商品名字</label>
+                    <input type="text" class="form-control" id="exampleInputName2" v-model="name" placeholder="请输入商品名字">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail2">商品价格</label>
+                    <input type="number" class="form-control" id="exampleInputEmail2" v-model="price" placeholder="请输入商品价格">
+                </div>
+                <button type="submit" v-on:click.prevent="add" class="btn btn-default">增加商品</button>
+            </form>
+            <br/>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <td>选中商品</td>
+                        <td>商品名字</td>
+                        <td>商品价格</td>
+                        <td>删除商品</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="(item,index) in lists" :class="{reds:item.isRed}" v-on:click="red(index)">
+                        <td>
+                            <input type="checkbox" @click.stop="" v-model="checkeds" :value="index">
+                        </td>
+                        <td v-text="item.name"></td>
+                        <td v-text="item.price"></td>
+                        <td>
+                            <span v-on:click.stop="removeItem(index)" class="glyphicon glyphicon-remove btn-red"></span>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td>
+                            <button v-on:click.stop="delSel" type="button" class="btn btn-danger">删除选中</button>
+                        </td>
+                        <td colspan="3">
+                            <span class="sel-sum" v-text="'总价'+comSum+'元'"></span>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+
+    </div>
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        const vm = new Vue({
+            el: "#app",
+            data: {
+                lists: [{
+                    name: '戴尔电脑',
+                    price: 3999,
+                    isRed: false
+                },
+                {
+                    name: '华为手机',
+                    price: 4398,
+                    isRed: false
+                },
+                {
+                    name: '小米手环',
+                    price: 99,
+                    isRed: false
+                }, {
+                    name: '衣服',
+                    price: 999,
+                    isRed: false
+                }
+                ],
+                sum: 0,
+                checkeds: [],
+                price: '',
+                name: '',
+                keywords: ''
+            },
+            methods: {
+                red(index) {
+                    this.lists[index].isRed = !this.lists[index].isRed;
+                },
+                removeItem(index) {
+                    this.lists.splice(index, 1);
+                },
+                delSel() {
+                    this.lists = this.lists.filter((ite, ins) => {
+                        if (!this.checkeds.includes(ins)) {
+                            return ite;
+                        }
+                    })
+                    this.checkeds = [];
+                },
+                add() {
+                    if (this.name == '' || this.price == '') {
+                        alert("请输入商品名称或商品价格!");
+                    } else {
+                        this.lists.push({
+                            name: this.name,
+                            price: Number(this.price),
+                            isRed: false
+                        });
+                        this.name = '';
+                        this.price = '';
+                    }
+                },
+                search() {
+                    this.lists = this.lists.filter(item => {
+                        if (item.name.includes(this.keywords) || String(item.price).includes(this.keywords)) {
+                                return item;
+                        }
+                    });
+                    this.keywords='';
+                }
+            },
+            computed: {
+                comSum() {
+                    let cou = 0;
+                    for (let i = 0; i < this.lists.length; i++) {
+                        if (this.lists[i].isRed) {
+                            cou += this.lists[i].price;
+                        }
+                    }
+                    this.sum = cou;
+                    return this.sum;
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

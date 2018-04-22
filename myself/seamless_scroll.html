@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>滚动练习</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        ul{
+            list-style-type: none;
+        }
+        .sliber{
+            width: 540px;
+            height: 100px;
+            border: 1px solid #666666;
+            padding: 10px 0;
+            margin: 100px auto;
+            position: relative;
+            overflow: hidden;
+        }
+        ul{
+            width: 550px;
+            height: 120px;
+            position: absolute;
+        }
+        ul li{
+            float: left;
+            width: 100px;
+            height: 100px;
+            line-height: 100px;
+            text-align: center;
+            background-color: black;
+            color: white;
+            margin-right: 10px;
+            font-size: 20px;
+        }
+        .btn{
+            margin: 0 auto;
+            text-align: center;
+        }
+        .btn button{
+            width: 100px;
+            height: 100px;
+        }
+        button:first-child{
+            margin-right: 5px;
+        }
+        button:last-child{
+            margin-left: 5px;
+        }
+    </style>
+</head>
+<body>
+<div class="sliber">
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+    </ul>
+</div>
+<div class="btn">
+    <button>向左</button>
+    <button>向右</button>
+</div>
+<script>
+    var oUl=document.getElementsByTagName("ul")[0];
+    var aBtn=document.getElementsByTagName("button");
+    oUl.innerHTML+=oUl.innerHTML;
+    oUl.style.width=oUl.offsetWidth*2+"px";
+    var dir=-10;
+    var isRun=false;
+    aBtn[0].onclick=function () {
+        dir=-10;
+        isRun=true;
+    }
+    aBtn[1].onclick=function () {
+
+        dir=10;
+        isRun=true;
+
+    }
+    setInterval(function () {
+        if(isRun) {
+            oUl.style.left = oUl.offsetLeft + dir + "px";
+            if (oUl.offsetLeft == -oUl.offsetWidth / 2) {
+                oUl.style.left = "0px";
+            }
+            if (oUl.offsetLeft > 0) {
+                oUl.style.left = -oUl.offsetWidth / 2 + "px";
+            }
+        }
+    },100);
+</script>
+</body>
+</html>

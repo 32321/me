@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>飞旋的照片墙</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body,html{
+            width: 100%;
+            height: 100%;
+        }
+        body{
+            position: relative;
+        }
+        #container{
+            width: 100%;
+            height: 100%;
+            background-image: url("images/bg.jpg");
+        }
+        #container div{
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            border: 5px solid #cccccc;
+            box-shadow: 2px 2px 2px rgba(0,0,50,.2);
+            top: -500px;
+            left: -500px;
+            transition: all 1500ms ease-in-out;
+        }
+        #container span{
+            display: block;
+            width: 100px;
+            height: 100px;
+            opacity:0;
+            transition: all 1s linear;
+        }
+        .prev ,.next{
+            width: 60px;
+            height: 60px;
+            background-repeat:no-repeat;
+            background-color: aliceblue;
+            background-position: center;
+            position: absolute;
+            top:50%;
+            margin-top: -30px;
+            display: none;
+        }
+        .prev {
+            background-image: url("images/prev.png");
+            left:0;
+            border-radius: 0 8px 8px 0;
+        }
+        .next{
+            background-image: url("images/next.png");
+            right:0;
+            border-radius: 8px 0 0 8px;
+        }
+    </style>
+</head>
+<body>
+    <div id="container"></div>
+    <div class="prev"></div>
+    <div class="next"></div>
+    <script>
+        var oCon=document.getElementById("container");
+        var count=0;
+        var aImage,a,b,widGap,higGap;
+        for(var i=0;i<24;i++){
+            //图片的预加载
+            //微缩图的加载
+            var oImg=new Image();
+            oImg.onload=function () {
+                    count++;
+                    if(count==48){
+                        loadSucessed()
+                    }
+            }
+            oImg.src="images/thumbs/"+(i+1)+".jpg";
+
+            //大图的加载
+            var oBImg=new Image();
+            oBImg.onload=function () {
+                count++;
+                if(count==48){
+                    loadSucessed()
+                }
+            }
+            oBImg.src="images/"+(i+1)+".jpg";
+            var oD=document.createElement("div");
+            oD.className="aaa"
+            oD.innerHTML="<span></span>";
+            oCon.appendChild(oD);
+        }
+
+        //当所有照片都加载完毕执行的方法
+        function loadSucessed() {
+            aImage=oCon.getElementsByTagName("div");
+            a=aImage[0].offsetWidth;
+            b=aImage[0].offsetHeight;
+            widGap=(oCon.offsetWidth-aImage[0].offsetWidth*6)/7;
+            higGap=(oCon.offsetHeight-aImage[0].offsetHeight*4)/5;
+            for(var m=0;m<4;m++){
+                for(var n=0;n<6;n++){
+                    //设置每个div的左偏移量和上偏移量
+                    aImage[m*6+n].style.backgroundImage="url(images/thumbs/"+(m*6+n+1)+".jpg)";
+                    aImage[m*6+n].style.left=(n+1)*widGap+a*n+"px";
+                    aImage[m*6+n].style.top=(m+1)*higGap+b*m+"px";
+                    aImage[m*6+n].style.transitionDelay=(24-(m*6+n+1))*200+'ms';//字符串拼接一定呀注意
+                    aImage[m*6+n].style.transform="rotate("+(Math.random()*40-20)+"deg)";
+                    aImage[m*6+n].posi={
+                        row:m,
+                        col:n
+                    }
+                    aImage[m*6+n].index=m*6+n+1;
+                }
+            }
+        }
+        var flag=true;
+        var bigWid=600,bigHig=400,ins,inst=1;
+        var oPre=document.getElementsByClassName("prev")[0];
+        var oNext=document.getElementsByClassName("next")[0];
+        oCon.onclick=function (e) {//第一次点击聚合，第二次点击散开
+            if(this===e.target){//保证点击空白的地方没有反应
+                flag=false;
+            }
+            if(e.target.className==="aaa"){ //无论点击边框还使span都会有反应，并获取当前图片的index
+                ins=e.target.index;
+            }else {
+                ins=e.target.parentNode.index;
+                inst=ins;
+            }
+            if(flag){
+                for(var i=0;i<24;i++){
+                    aImage[i].style.t
+                    aImage[i].style.transform="rotate(0)";
+                    aImage[i].style.transitionDelay='0ms';//一定要带上单位
+                    aImage[i].style.borderWidth="1px";
+                    aImage[i].style.borderColor="#fff";
+                    aImage[i].style.left=(oCon.offsetWidth-bigWid)/2+aImage[i].posi.col*100+"px";
+                    aImage[i].style.top=(oCon.offsetHeight-bigHig)/2+aImage[i].posi.row*100+"px";
+                    var oSp=aImage[i].getElementsByTagName("span")[0];
+                    oSp.style.opacity=1;
+                    oSp.style.backgroundImage="url(images/"+ins+".jpg)";
+                    oSp.style.backgroundPosition=-(aImage[i].posi.col*a)+"px "+(-(aImage[i].posi.row*b))+"px";
+                    oSp.style.transitionDelay="0ms";
+                }
+                oPre.style.display="block";
+                oNext.style.display="block";
+            }else {
+                for(var m=0;m<4;m++){
+                    for(var n=0;n<6;n++){
+                        //设置每个div的左偏移量和上偏移量
+                        aImage[m*6+n].style.backgroundImage="url(images/thumbs/"+(m*6+n+1)+".jpg)";
+                        aImage[m*6+n].style.left=(n+1)*widGap+a*n+"px";
+                        aImage[m*6+n].style.top=(m+1)*higGap+b*m+"px";
+                        aImage[m*6+n].style.transform="rotate("+(Math.random()*40-20)+"deg)";
+                        var oSp=aImage[m*6+n].getElementsByTagName("span")[0];
+                        oSp.style.opacity=0;
+                        oSp.style.transitionDelay="0ms";
+                        aImage[m*6+n].style.borderWidth="5px";
+                    }
+                }
+                oPre.style.display="none";
+                oNext.style.display="none";
+            }
+            flag=!flag;//变化由点击因此的操作
+        }
+
+        oNext.onclick=oPre.onclick=function (e) {  //到下一页或上一页
+                if(e.target===oNext){
+                    inst+=1;
+                    if(inst==25){
+                        inst=1;
+                    }
+                }else {
+                    inst-=1;
+                    if(inst==0) {
+                        inst = 24;
+                    }
+                }
+                var arr=[];
+                for(var i=0;i<24;i++){
+                    arr.push(i);
+                }
+                arr.sort(function (a,b) {
+                    return Math.random()-0.5;  //这里应注意复习一下
+                })
+                for(var i=0;i<24;i++){        //24个小块都是一个一个的变化的
+                    var oSp=aImage[i].getElementsByTagName("span")[0];
+                    oSp.style.backgroundImage="url(images/"+inst+".jpg)";
+                    oSp.style.transitionDelay=(arr[i]+1)*70+"ms";
+                }
+        }
+    </script>
+</body>
+</html>

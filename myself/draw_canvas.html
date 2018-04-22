@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #draw{
+            background-color: black;
+        }
+    </style>
+</head>
+<body>
+    <canvas width="800" height="600" id="draw"></canvas>
+    <script>
+        var oDraw=document.getElementById("draw");
+        var con=oDraw.getContext("2d");
+        oDraw.onmousedown=function (e) {
+            var x=e.clientX;
+            var y=e.clientY;
+            con.beginPath();
+            con.moveTo(x,y);
+            oDraw.onmousemove=function (e) {
+                var x1=e.clientX;
+                var y1=e.clientY;
+                con.lineTo(x1,y1);
+                con.strokeWidth=5;
+                con.strokeStyle="red";
+                con.stroke();
+            }
+            oDraw.onmouseup=function () {
+                oDraw.onmousemove=null;
+            }
+        }
+    </script>
+</body>
+</html>

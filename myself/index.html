@@ -13,7 +13,11 @@
 <meta name="author" content="">
 <!-- Mobile Specific Metas-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="">
+<link rel="icon" href="./images/1.ico" type="image/x-icon">
 <!--main style-->
+
 <link rel="stylesheet" type="text/css" media="screen" href="css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" media="screen" href="css/main.css">
 <!--google font style-->
@@ -23,12 +27,37 @@
 <!--font-family: 'Open Sans', sans-serif;-->
 <!-- font icon css style-->
 <link rel="stylesheet" href="css/font-awesome.min.css">
+<style>
+  .totop {
+	width:50px;
+	height:50px;
+	background:	black;
+	color:#fff;
+	text-align:center;
+	line-height:50px;
+	font-size:30px;
+	text-decoration:none;
+	position:fixed;
+	right:50px;
+	bottom:50px;
+  display:none;
+  z-index: 9999;  
+}
+.totop:hover {
+	background:#093
+}
+  .style{
+    text-align: center;
+  }
+</style>
 </head>
-<body onLoad="load()" onUnload="GUnload()">
+<body onUnload="GUnload()">
 <!-- Preloader -->
 <div id="preloader">
 	<div id="status"></div>
 </div>
+<a href="javascript:;" class="totop"> ↑ </a>
+
 <!--wrapper start-->
 <div class="wrapper noGap" id="wrapper">
 
@@ -237,14 +266,14 @@ mod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
         </li>
         <li class="wordpress col-xs-6 col-sm-4 col-md-3 col-lg-3">
           <div class="lightCon">
-              <a href="">
+              <a href="./左右移动.html">
                 <img src="images/projects/thumb-images/thumb11.jpg" alt="" >
               </a>
           </div>
         </li>
         <li class="template wordpress col-xs-6 col-sm-4 col-md-3 col-lg-3">
           <div class="lightCon">
-              <a href="">
+              <a href="./small_to_big/放大镜.html">
                 <img src="images/projects/thumb-images/thumb12.jpg" alt="" >
               </a>
           </div>
@@ -253,19 +282,23 @@ mod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
     </div>
   </section>
   
+  
 
   <section class="footer" id="contact">
     <div class="container">
       <ul>
-        <li><a href="https://zhulihao965255.github.io"><i class="fa fa-twitter fa-2x"></i></a></li>
-        <li><a href="#"><i class="fa fa-facebook fa-2x"></i></a></li>
-        <li><a href="#"><i class="fa fa-linkedin fa-2x"></i></a></li>
-        <li><a href="https://github.com/zhulihao965255"><i class="fa fa-vimeo-square fa-2x"></i></a></li>
-        <li><a href="#"><i class="fa fa-dribbble fa-2x"></i></a></li>
+        <li><a href="https://github.com/zhulihao965255"><i class="fa fa-github fa-2x"></i></a></li>
+        <li><a href="https://weibo.com/u/5699774443/home?leftnav=1"><i class="fa fa-weibo fa-2x"></i></a></li>
+        <li><a href="https://blog.csdn.net/yadiao9920"><i class="fa fa-weixin fa-2x"></i></a></li>
+        <li><a href="https://mail.qq.com/cgi-bin/frame_html?sid=Z9kL0IJzI3mitSlz&r=db1e1205632aaa26a33b642393727737"><i class="fa fa-qq fa-2x"></i></a></li>
+        <li><a href="http://facebook.com"><i class="fa fa-facebook fa-2x"></i></a></li>
       </ul>
     </div>
   </section>
   </div>
+  <footer class="row style">
+      Copyright&nbsp;© &nbsp;2017&nbsp;ZHU&nbsp;LI &nbsp;HAO&nbsp;豫ICP备18011511号
+  </footer>
 <script type="text/javascript" src="js/modernizr.custom.26633.js"></script> 
 
 <script type="text/javascript" src="js/jquery.min.js"></script> 
@@ -273,7 +306,26 @@ mod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
 
 
 <script type="text/javascript" src="js/jquery.placeholder.js"></script> 
-
+<script>
+    $(function () {
+        $(window).scroll(function () {
+          var t = $(this).scrollTop();
+          if (t > 300) {
+            $(".totop").stop().fadeIn(300);
+            $('.totop').css('display','block');
+          } else {
+            $(".totop").stop().fadeOut(300);
+            $('.totop').css('display','none');
+            
+          }
+        });
+        $(".totop").click(function () {
+          $("body,html").stop().animate({
+            scrollTop: 0
+          }, 300); //html是为了兼容火狐和IE  
+        });
+      });
+</script>
 <!--for header jquery--> 
 <!--<script type="text/javascript" src="js/stickUp.js"></script> -->
 <!--<script src="js/jquery.superslides.js" type="text/javascript" charset="utf-8"></script>-->

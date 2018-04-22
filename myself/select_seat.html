@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>电影选座</title>
+    <link rel="stylesheet" href="./css/global.css">
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <style>
+        body{
+            background-color: black;
+        }
+        .content span{
+            display: inline-block;
+            width: 70px;
+            height: 50px;
+            /*margin-left: 15px;*/
+        }
+        div{
+            margin: 0 auto;
+        }
+        .box{
+            width: 720px;
+        }
+        .left,.right{
+            width: 350px;
+        }
+        .top-t span{
+            color: #dddddd;
+            display: inline-block;
+            width: 40px;
+            height: 30px;
+            margin-right: 15px;
+        }
+        .top{
+            margin-bottom: 50px;
+            height: 30px;
+        }
+        .top span{
+            display: inline-block;
+            width: 40px;
+            height: 30px;
+            margin-right: 15px;
+        }
+        .top .a{
+            background-color: #2c8021;
+        }
+        .top .b{
+            background-color: #cccccc;
+        }
+        .top .c{
+            background-color: #d3160a;
+        }
+        .left{
+            float: left;
+            margin-bottom: 30px;
+        }
+        .left span{
+            margin-right: 15px;
+        }
+        .right{
+            margin-left: 20px;
+            float: right;
+        }
+        .right span{
+            margin-left: 17.25px;
+        }
+        .bb{
+            background-color: #cccccc;
+        }
+        .cc{
+            background-color: #2c8021;
+        }
+        .active{
+            background-color: #d3160a;
+        }
+        .bottom{
+            width: 720px;
+            height: 60px;
+            margin:30px auto;
+            margin-bottom: 0;
+        }
+        .bottom p{
+            background-color: #666666;
+            line-height: 60px;
+            float: left;
+            width: 520px;
+        }
+        .bottom span{
+            font-size: 20px;
+            line-height: 60px;
+        }
+        .bottom .col{
+            color: red;
+        }
+        .bottom span:last-child{
+            font-size: 10px;
+        }
+        button{
+            width: 200px;
+            height: 63px;
+            font-size: 22px;
+            background-color: #b2591b;
+            border: 1px solid #b2591b;
+        }
+        .middle{
+            float: left;
+            background-color: #333333;
+            margin-bottom: 30px;
+        }
+        .middle .log span{
+            color:#dddddd;
+            font-size: 22px;
+        }
+        .middle .log span:last-child{
+            float: right;
+        }
+        .sel{
+            width: 720px;
+            height: 40px;
+            padding: 10px 0;
+        }
+        .sel span{
+            display: inline-block;
+            border: 1px solid #bb880e;
+            color:#bb880e;
+            width: 90px;
+            height: 40px;
+            font-size: 20px;
+            line-height: 40px;
+            margin-right: 50px;
+            text-align: center;
+        }
+        button{
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="top-t">
+            <span class="a">已售</span><span class="b">待售</span><span class="c">选定</span>
+        </div>
+        <div class="top">
+            <span class="a"></span><span class="b"></span><span class="c"></span>
+        </div>
+        <div class="content clearfix">
+            <div class="left">
+                <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+                <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+            </div>
+            <div class="right">
+                <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+                <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="middle">
+            <div class="log"><span>已选座位</span><span>最多可选择5个座位</span></div>
+            <div class="sel" ></div>
+        </div>
+        <div class="bottom clearfix">
+            <p id="money">
+                <span>合计:</span>
+                <span class="col">￥0</span>
+                <span>￥99*0</span>
+            </p>
+            <button>确认选座</button>
+        </div>
+    </div>
+    <script>
+        var pay=0,money=0,index,floor,th;
+        color();
+        $(".content span").click(function () {
+            if($(this).hasClass("cc")){
+                    alert("此座位不可选购");
+            }else {
+                    if($(this).attr("payadd")==="a"){
+                        pay+=1;
+                        if(pay<=5){
+                            $(this).attr("payadd","bbb");
+                            index=$(".content span").index($(this))+1;
+                            $(".sel").append("<span class='on'>"+site(index)+"座</span>");
+                            $(this).toggleClass("active");
+                            money=99*pay;
+                            $("#money span:eq(1)").html("￥"+money);
+                            $("#money span:last-child").html("￥99*"+pay);
+                        }else {
+                            alert("择最多可选5个座位");
+                        }
+                    }else {
+                        if(pay>5){
+                            pay=5;
+                        }
+                        pay-=1;
+                        index=$(".content span").index($(this))+1;
+                        $("span:contains("+site(index)+")").remove();
+                        $(this).attr("payadd","a");
+                        $(this).toggleClass("active");
+                        money=99*pay;
+                        $("#money span:eq(1)").html("￥"+money);
+                        $("#money span:last-child").html("￥99*"+pay);
+                    }
+                }
+        });
+
+        function color() {//给那个座位初始作色
+            for(var i=0;i<$(".content span").length;i++){
+                var ran=Math.random()*11+1;
+                if(ran>=1&&ran<7){
+                    $(".content span").eq(i).addClass("bb");//待售
+                }
+                if(ran>=7){
+                    $(".content span").eq(i).addClass("cc");//禁售
+                }
+            }
+            $(".content span").attr("payadd","a");
+        }
+
+        function site(index) {//生成座位
+            if(index<=32){
+                if(index%4===0){
+                    floor=Math.floor(index/4);
+                    th=4;
+                }else {
+                    floor=Math.floor(index/4)+1;
+                    th=index%4;
+                }
+            }else{
+                index-=32;
+                if(index%4===0){
+                    floor=Math.floor(index/4);
+                    th=8;
+                }else {
+                    floor=Math.floor(index/4)+1;
+                    th=index%4+4;
+                }
+            }
+            return floor+"排"+th;
+        }
+    </script>
+</body>
+</html>

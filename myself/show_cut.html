@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>标签页</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        li{
+            list-style: none;
+        }
+        .box{
+            width: 300px;
+            height: 400px;
+            background-color: #666666;
+            margin: 100px 500px;
+            text-align: center;
+        }
+        .nav{
+            width: 300px;
+            height: 100px;
+            background-color: #00aaee;
+        }
+        .nav li{
+            float: left;
+            width: 100px;
+            line-height: 100px;
+            cursor: pointer;
+        }
+        .nav .active{
+             background-color: #b2591b;
+         }
+        .content ul{
+            display: none;
+        }
+        .content .active{
+            display: block;
+        }
+    </style>
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+</head>
+<body>
+    <div class="box">
+        <ul class="nav">
+            <li class="active">第一讲</li>
+            <li>第二讲</li>
+            <li >第三讲</li>
+        </ul>
+        <div class="content">
+        <ul class="active">
+            <li>fygyeg</li>
+            <li>hvytnviur</li>
+            <li>eruegy</li>
+            <li>emucreg</li>
+        </ul>
+        <ul>
+            <li>jdhuhweui </li>
+            <li>fjugreugh</li>
+            <li>weiufhufre</li>
+            <li>ehfurhgru</li>
+        </ul>
+        <ul>
+            <li>jkfhureghr</li>
+            <li>ef hurhg</li>
+            <li>iguth</li>
+            <li>ughreg</li>
+        </ul>
+        </div>
+    </div>
+    <script>
+//        var $li=$(".nav > li");
+//        var $ul=$(".aa");
+//        for(var i=0;i<$li.length;i++){
+//            $li.eq(i).attr("abc",i);
+//            $li.eq(i).click(function () {
+//                console.log($(this).indexabc);
+//                for(var j=0;j<$li.length;j++){
+//                    $ul.eq(j).css("display","none");
+//                }
+//                $ul.eq($(this).attr("abc")).css("display","block");
+//            });
+//        }
+
+//        $(".nav > li").click(function () {
+//            $(".content > ul").css("display","none");
+//            $(".nav > li").css("background-color","#00aaee")
+//            $(".content > ul").eq($(this).index()).css("display","block");
+//            $(".nav > li").eq($(this).index()).css("background-color","#b2591b");
+//        })
+
+//        $(".nav > li").click(function () {
+//            $(this).addClass("active").siblings().removeClass("active");
+//            $(".content > ul").eq($(this).index()).addClass("active").siblings().removeClass("active");
+//        })
+
+        $(".nav > li").click(function () {
+            $(this).add($(".content > ul").eq($(this).index())).addClass("active").siblings().removeClass("active");
+        })
+    </script>
+</body>
+</html>
